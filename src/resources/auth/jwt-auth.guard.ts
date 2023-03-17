@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
       if (bearer !== 'Bearer' || !token) {
         throw new UnauthorizedException();
       }
-      this.jwtService.verify(token);
+      this.jwtService.verify(token, { secret: process.env.JWT_SECRET_KEY });
 
       return true;
     } catch (e) {
